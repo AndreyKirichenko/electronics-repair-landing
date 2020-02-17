@@ -1,0 +1,45 @@
+@import '../../../styles/theme.scss';
+
+.section-welcome {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 96px 0;
+}
+
+.section-welcome__inner {
+  text-align: center;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-welcome__title {
+  color: #fff;
+  font-family: $montserrat-font;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  transition: letter-spacing 0.1s linear;
+  white-space: nowrap;
+
+  @media (min-width: $media-max-text) {
+    font-size: 48px;
+  }
+}
+
+.section-welcome__description {
+  color: #fff;
+  font-family: $lora-font;
+  font-size: 20px;
+  line-height: 1.2em;
+  text-align: center;
+  transition: letter-spacing 0.1s linear;
+  white-space: nowrap;
+}

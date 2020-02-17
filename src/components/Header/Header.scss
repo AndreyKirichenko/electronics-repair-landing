@@ -1,0 +1,28 @@
+@import '../../styles/theme';
+
+.header {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: 64px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+  transition: background 1s ease;
+}
+
+.header--with-background {
+  // background-color: #000;
+  // background-color: rgba(#000, 0.88);
+}
+
+.header__logo {
+  padding: 0 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.header__burger {
+  padding: 0 32px;
+  z-index: 1;
+}

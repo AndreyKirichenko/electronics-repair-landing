@@ -1,0 +1,25 @@
+@import '../../styles/theme';
+
+@keyframes header-logo-scale-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.header-logo {
+  color: #fff;
+  display: block;
+  font-family: $montserrat-font;
+  font-size: 16px;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+.header-logo--with-animated-letters .header-logo__letter {
+  display: inline-block;
+  transform: scaleX(1);
+  animation: header-logo-scale-x 0.5s 1 ease-in;
+}
