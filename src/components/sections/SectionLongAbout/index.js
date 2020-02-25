@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { createRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSectionEffects } from '../../hooks';
+import { setPageStyle } from '../../../actions/page';
 
 import './index.scss';
 import Typography from '../../Typography';
 
 
 const SectionLongAbout = () => {
+  const ref = createRef();
+  // const { scrollOverlayY } = useSectionEffects(ref);
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if(scrollOverlayY >= -1 && scrollOverlayY < 1) {
+
+  //     const color = 255 - ((scrollOverlayY + 1) / 2 * 255);
+    
+  //     dispatch(
+  //       setPageStyle({
+  //         backgroundColor: `rgba(${color},${color},${color})`,
+  //       })
+  //     );
+  //   }
+  // }, [ scrollOverlayY ]);
+
+  // console.log('SectionLongAbout scrollOverlayY', scrollOverlayY);
+
   return (
-    <section className='section-long-about'>
+    <section className='section-long-about' ref={ref}>
       <Typography>
         <h1>О сервисном центре</h1>
 

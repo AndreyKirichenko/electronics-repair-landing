@@ -3,10 +3,12 @@
 .section-welcome {
   align-items: center;
   box-sizing: border-box;
+  color: #fff;
   display: flex;
   justify-content: center;
   min-height: 100vh;
   padding: 96px 0;
+  position: relative;
 }
 
 .section-welcome__inner {
@@ -34,6 +36,12 @@
   }
 }
 
+.section-welcome__title-br {
+  @media (min-width: 420px) {
+    display: none;
+  }
+}
+
 .section-welcome__description {
   color: #fff;
   font-family: $lora-font;
@@ -42,4 +50,24 @@
   text-align: center;
   transition: letter-spacing 0.1s linear;
   white-space: nowrap;
+}
+
+@keyframes desktop-welcom__noise {
+  0% {
+    transform: translateY(100vh);
+  }
+  10% {
+    transform: translateY(0);
+  }
+}
+
+.section-welcom__noise {
+  // background-color: rgba(#000, 0.1);
+  animation: desktop-welcom__noise 10s infinite linear 3s;
+  backdrop-filter: blur(10px) invert(1%);
+  height: 8px;  
+  position: absolute;
+  top: -1px;
+  width: 100%;
+  z-index: 1;
 }

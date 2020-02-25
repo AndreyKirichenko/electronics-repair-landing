@@ -3,6 +3,7 @@
 .header {
   align-items: center;
   box-sizing: border-box;
+  color: #fff;
   display: flex;
   height: 64px;
   flex-wrap: wrap;
@@ -11,9 +12,8 @@
   transition: background 1s ease;
 }
 
-.header--with-background {
-  // background-color: #000;
-  // background-color: rgba(#000, 0.88);
+.header--black-on-white {
+  color: #000;
 }
 
 .header__logo {

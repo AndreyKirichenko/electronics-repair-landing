@@ -1,7 +1,6 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
@@ -9,7 +8,11 @@ import './index.scss';
 import LetterWrapper from '../LetterWrapper';
 import { toggleMobileMenuOpened } from '../../actions/mobileMenu';
 
-const MobileMenu = ({ isMobileMenuOpened, list, toggleMobileMenuOpened }) => {
+const MobileMenu = ({ list }) => {
+
+  const { isMobileMenuOpened } = useSelector(state => state.mobileMenu);
+
+  const dispatch = useDispatch();
 
   const classNames = classnames(
     'mobile-menu',
@@ -19,15 +22,14 @@ const MobileMenu = ({ isMobileMenuOpened, list, toggleMobileMenuOpened }) => {
   );
 
   const onToggleMenu = () => {
-    toggleMobileMenuOpened();
+    dispatch(toggleMobileMenuOpened());
   };
 
   const getItems = () => {
     return (
       <ul className='mobile-menu__list'>
         {
-          list.map((item) => {
-            const { title, url } = item;
+          list.map(({ title, url }) => {
             return (
               <li className='mobile-menu__item' key={title} onClick={onToggleMenu}>
                 <Link className='mobile-menu__link' to={url}>
@@ -49,19 +51,7 @@ const MobileMenu = ({ isMobileMenuOpened, list, toggleMobileMenuOpened }) => {
 };
 
 MobileMenu.propTypes = {
-  isMobileMenuOpened: PropTypes.bool,
+  list: PropTypes.array,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isMobileMenuOpened: state.mobileMenu.isMobileMenuOpened,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleMobileMenuOpened: bindActionCreators(toggleMobileMenuOpened, dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MobileMenu);
+export default MobileMenu;

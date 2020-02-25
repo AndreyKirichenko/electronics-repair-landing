@@ -10,12 +10,16 @@
 }
 
 .header-logo {
-  color: #fff;
+  color: inherit;
   display: block;
   font-family: $montserrat-font;
   font-size: 16px;
   line-height: 1em;
   text-transform: uppercase;
+
+  @media (min-width: $media-tablet) {
+    font-size: 24px;
+  }
 }
 
 .header-logo--with-animated-letters .header-logo__letter {

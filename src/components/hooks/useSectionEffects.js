@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux';
 
 const useSectionEffects = (ref) => {
   const { 
-    pageHeight,
-    scrollY,
-    viewportHeight,
-    viewportWidth
-  } = useSelector(state => state.page);
+    document: { height: documentHeight },
+    scroll: { y: scrollY },
+    viewport: { height: viewportHeight, width: viewportWidth },
+  } = useSelector(state => state.ui);
 
   const [sectionPosition, setSectionPosition] = useState({
     start: 0,
@@ -33,21 +32,21 @@ const useSectionEffects = (ref) => {
     });
   };
 
-  const overSectionScrollY = getSideChainScrollY({
+  const scrollOverlayY = getScrollOverlayY({
     sectionPosition,
-    pageHeight,
+    documentHeight,
     viewportHeight,
     scrollY,
   });
 
   return {
-    overSectionScrollY,
+    scrollOverlayY,
   };
 };
 
-const getSideChainScrollY = ({
+const getScrollOverlayY = ({
   sectionPosition,
-  pageHeight,
+  documentHeight,
   viewportHeight,
   scrollY,
 }) => {
@@ -58,7 +57,7 @@ const getSideChainScrollY = ({
   }
 
   let end = sectionPosition.end;
-  const minPossibleEnd = pageHeight - viewportHeight;
+  const minPossibleEnd = documentHeight - viewportHeight;
 
   if(end > minPossibleEnd) {
     end = minPossibleEnd;
@@ -66,8 +65,16 @@ const getSideChainScrollY = ({
 
   const delta = end - start;
   const relativeScrollY = scrollY - start;
-  const ratio = delta ? relativeScrollY / delta * 2 - 1 : -1;
-  return ratio;
+
+  let scrollOverlayY = delta ? relativeScrollY / delta  : 0;
+
+  if(scrollOverlayY < 0) {
+    scrollOverlayY = 0;
+  } else if(scrollOverlayY > 1) {
+    scrollOverlayY = 1;
+  }
+
+  return scrollOverlayY;
 };
 
 export default useSectionEffects;

@@ -1,44 +1,42 @@
 import React, { createRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setStyle } from '../../../actions/page';
+import { setPageStyle } from '../../../actions/page';
 
 import './index.scss';
 import { useSectionEffects } from '../../hooks';
+import Section from '../../Section';
 
 const SectionWelcome = () => {
   const ref = createRef();
-  const { overSectionScrollY } = useSectionEffects(ref);
+  const { scrollOverlayY } = useSectionEffects(ref);
 
   const innerStyle = {
-    opacity: 1 - (overSectionScrollY),
-    transform: `scale(${overSectionScrollY + 2})`,
+    opacity: 1 - (scrollOverlayY),
+    transform: `scale(${scrollOverlayY + 1})`,
   };
 
   const titleStyle = {
-    letterSpacing: `${(overSectionScrollY + 1) * 10}px`,
+    letterSpacing: `${scrollOverlayY * 40}px`,
   };
 
   const descriptionStyle = {
-    letterSpacing: `${(overSectionScrollY + 1) * 20}px`,
+    letterSpacing: `${scrollOverlayY * 60}px`,
   };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(overSectionScrollY >= -1 && overSectionScrollY < 1) {
+    const color = (scrollOverlayY) * 255;
 
-      const color = (overSectionScrollY + 1) / 2 * 255;
-    
-      dispatch(
-        setStyle({
-          backgroundColor: `rgba(${color},${color},${color})`,
-        })
-      );
-    }
-  }, [ overSectionScrollY ]);
+    dispatch(
+      setPageStyle({
+        backgroundColor: `rgba(${color},${color},${color})`,
+      })
+    );
+  }, [ scrollOverlayY ]);
 
   return (
-    <section className='section-welcome' ref={ref}>
+    <Section className='section-welcome' ref={ref} id='welcome' nextSectionId='price'>
       <div
         className='section-welcome__inner'
         style={innerStyle}
@@ -47,7 +45,7 @@ const SectionWelcome = () => {
           className='section-welcome__title'
           style={titleStyle}
         >
-          Ремонт электроники
+          Ремонт <br className='section-welcome__title-br' />электроники
         </h1>
 
         <span
@@ -64,7 +62,9 @@ const SectionWelcome = () => {
           для вашей техники
         </span>
       </div>
-    </section>
+
+      <div className='section-welcom__noise' />
+    </Section>
   );
 };
 

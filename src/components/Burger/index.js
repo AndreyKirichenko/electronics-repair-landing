@@ -1,17 +1,19 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
 import './index.scss';
 import { toggleMobileMenuOpened } from '../../actions/mobileMenu';
 import LetterWrapper from '../LetterWrapper';
 
-const Burger = ({ isMobileMenuOpened, toggleMobileMenuOpened }) => {
+const Burger = () => {
+  const dispatch = useDispatch();
+
   const onToggleMenu = () => {
-    toggleMobileMenuOpened();
+    dispatch(toggleMobileMenuOpened());
   };
+
+  const isMobileMenuOpened = useSelector(state => state.mobileMenu.isMobileMenuOpened);
 
   const openTextClassNames =
     classnames(
@@ -38,13 +40,13 @@ const Burger = ({ isMobileMenuOpened, toggleMobileMenuOpened }) => {
     >
       <div className={openTextClassNames}>
         <LetterWrapper
-          text={'Menu'}
+          text={'Меню'}
           className='burger__letter'/>
       </div>
 
       <div className={closeTextClassNames}>
         <LetterWrapper
-          text={'Close'}
+          text={'Закрыть'}
           className='burger__letter'
         />
       </div>
@@ -52,19 +54,4 @@ const Burger = ({ isMobileMenuOpened, toggleMobileMenuOpened }) => {
   );
 };
 
-Burger.propTypes = {
-  isMobileMenuOpened: PropTypes.bool,
-  toggleMobileMenuOpened: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  isMobileMenuOpened: state.mobileMenu.isMobileMenuOpened,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleMobileMenuOpened: bindActionCreators(toggleMobileMenuOpened, dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Burger);
+export default Burger;

@@ -1,0 +1,44 @@
+@import '../../styles/theme';
+
+@keyframes section__go-next {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.section {
+  position: relative;
+}
+
+.section__go-next {
+  align-items: center;
+  bottom: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 96px;
+  position: relative;
+  width: 96px;
+  position: absolute;
+
+  svg {
+    animation: section__go-next 2s infinite ease-in;
+    content: '^';
+    height: 24px;
+    left: 50%;
+    width: 24px
+  }
+}
+
+.header-logo--with-animated-letters .header-logo__letter {
+  display: inline-block;
+  transform: scaleX(1);
+  
+}

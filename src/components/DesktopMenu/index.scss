@@ -15,20 +15,25 @@
   cursor: pointer;
   display: flex;
   box-sizing: border-box;
-  color: #fff;
+  color: inherit;
   font-family: $montserrat-font;
-  font-size: 16px;
+  font-size: 18px;
   justify-content: center;
   line-height: 1em;
+  // text-transform: uppercase;
   text-transform: lowercase;
   position: relative;
   transition: color 0.25s ease, transform 0.25s ease;
   height: 40px;
   padding: 0 32px;
+
+  &:before {
+    content: '',
+  }
 }
 
 .desktop-menu__link:hover {
-  color: #FBEB04;
+  text-decoration: underline;
 }
 
 @keyframes desktop-menu__letter {

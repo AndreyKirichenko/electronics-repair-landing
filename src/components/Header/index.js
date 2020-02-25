@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 import './index.scss';
@@ -16,22 +15,26 @@ const MEDIA_NAV = 960;
 
 const MENU_ITEMS = [
   {
-    title: 'About',
+    title: 'О нас',
     url: '/#about',
   },
   {
-    title: 'Team',
-    url: '/#team',
+    title: 'Услуги и цены',
+    url: '/#price',
   },
   {
-    title: 'Contacts',
+    title: 'Контакты',
     url: '/#contacts',
   },
 ];
 
-const Header = ({ scrollY, viewportWidth }) => {
-
+const Header = () => {
   const [ withBackground, setWithBackground ] = useState(false);
+
+  const { 
+    scroll: { y: scrollY },
+    viewport: { width: viewportWidth },
+  } = useSelector(state => state.ui);
 
   useEffect(() => {
     setWithBackground(scrollY > MAX_TRANSPARENT_SCROLL_Y);
@@ -71,14 +74,4 @@ const Header = ({ scrollY, viewportWidth }) => {
   );
 };
 
-Header.propTypes = {
-  scrollY: PropTypes.number,
-  viewportWidth: PropTypes.number,
-};
-
-const mapStateToProps = (state) => ({
-  scrollY: state.page.scrollY,
-  viewportWidth: state.page.viewportWidth,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
